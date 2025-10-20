@@ -28,9 +28,3 @@ jobs:
       
     - name: Build Docker image
       run: docker build -t democyber:latest .
-      
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: jar-file
-        path: target/*.jar
