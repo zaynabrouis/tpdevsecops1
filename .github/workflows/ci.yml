@@ -3,6 +3,8 @@ name: CI/CD - democyber
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   test:
@@ -23,3 +25,6 @@ jobs:
       
     - name: Build application
       run: mvn clean package -DskipTests
+      
+    - name: Build Docker image
+      run: docker build -t democyber:latest .
