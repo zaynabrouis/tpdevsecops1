@@ -30,3 +30,7 @@ jobs:
     # Build Maven
     - name: Build Java project with Maven
       run: mvn clean package
+      
+    # Test Docker build (without push)
+    - name: Build Docker image locally
+      run: docker build -t democyber:test .
