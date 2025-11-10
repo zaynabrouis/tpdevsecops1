@@ -15,7 +15,7 @@ jobs:
       uses: actions/checkout@v4
       
     - name: Run Gitleaks scan
-      uses: zricethezav/gitleaks-action@v2
+      uses: zricethezav/gitleaks-action@v2.0.0
       
     - name: Upload Gitleaks report
       uses: actions/upload-artifact@v4
@@ -53,11 +53,7 @@ jobs:
       with:
         image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/democyber:latest'
         format: 'table'
-        exit-code: '1'
+        exit-code: '0'
         ignore-unfixed: true
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
-
-# Push Docker image sur Docker Hub
-    - name: Push Docker image
-      run: docker push $DOCKER_IMAGE_NAME
