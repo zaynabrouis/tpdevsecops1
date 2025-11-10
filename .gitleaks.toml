@@ -1,0 +1,4 @@
+title = "Gitleaks config"
+[allowlist]
+    description = "Allow fake secrets for testing"
+    commits = ["24f880a67e2a9390f70e5d8cf226b527011d13f9"]
