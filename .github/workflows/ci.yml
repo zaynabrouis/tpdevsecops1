@@ -41,12 +41,15 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
-    - name: Build and push Docker image
+    - name: Set Docker image name
+      run: echo "DOCKER_IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/democyber:latest" >> $GITHUB_ENV
+
+    - name: Build Docker image
       uses: docker/build-push-action@v2
       with:
         context: .
-        push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/democyber:latest
+        push: false
+        tags: ${{ env.DOCKER_IMAGE_NAME }}
 
     - name: Scan Docker image with Trivy
       uses: aquasecurity/trivy-action@master
@@ -57,3 +60,7 @@ jobs:
         ignore-unfixed: true
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
+
+    # Push Docker image sur Docker Hub
+    - name: Push Docker image
+      run: docker push ${{ env.DOCKER_IMAGE_NAME }}
