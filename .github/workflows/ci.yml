@@ -54,12 +54,19 @@ jobs:
     - name: Scan Docker image with Trivy
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/democyber:latest'
+        image-ref: '${{ env.DOCKER_IMAGE_NAME }}'
         format: 'table'
+        output: 'trivy-results.sarif'
         exit-code: '0'
         ignore-unfixed: true
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
+
+    - name: Upload Trivy scan results
+      uses: actions/upload-artifact@v4
+      with:
+        name: trivy-report
+        path: 'trivy-results.sarif'
 
     # Push Docker image sur Docker Hub
     - name: Push Docker image
