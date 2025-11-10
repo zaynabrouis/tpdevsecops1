@@ -57,3 +57,7 @@ jobs:
         ignore-unfixed: true
         vuln-type: 'os,library'
         severity: 'CRITICAL,HIGH'
+
+# Push Docker image sur Docker Hub
+    - name: Push Docker image
+      run: docker push $DOCKER_IMAGE_NAME
