@@ -15,7 +15,7 @@ jobs:
       uses: actions/checkout@v4
       
     - name: Run Gitleaks scan
-      uses: zricethezav/gitleaks-action@v2.0.0
+      uses: zricethezav/gitleaks-action@v1
       
     - name: Upload Gitleaks report
       uses: actions/upload-artifact@v4
